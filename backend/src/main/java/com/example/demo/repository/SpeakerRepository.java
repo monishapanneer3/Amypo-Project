@@ -1,0 +1,8 @@
+package com.example.demo.repository;
+
+import com.example.demo.model.Speaker;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SpeakerRepository extends JpaRepository<Speaker, Long> {
+    boolean existsByEmail(String email);
+}
