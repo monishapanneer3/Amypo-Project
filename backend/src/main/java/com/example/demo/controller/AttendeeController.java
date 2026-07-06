@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +27,8 @@ public class AttendeeController {
 
     @GetMapping
     @Operation(summary = "Get all attendees")
-    public ResponseEntity<Page<AttendeeDTO>> getAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return ResponseEntity.ok(attendeeService.getAllAttendees(PageRequest.of(page, size)));
+    public ResponseEntity<Page<AttendeeDTO>> getAllAttendees(Pageable pageable) {
+        return ResponseEntity.ok(attendeeService.getAllAttendees(pageable));
     }
 
     @GetMapping("/{id}")
@@ -44,7 +41,7 @@ public class AttendeeController {
 
     @PostMapping
     @Operation(summary = "Create attendee")
-    public ResponseEntity<AttendeeDTO> create(@RequestBody AttendeeDTO dto) {
+    public ResponseEntity<AttendeeDTO> createAttendee(@RequestBody AttendeeDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(attendeeService.createAttendee(dto));
     }
 
@@ -57,7 +54,7 @@ public class AttendeeController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete attendee (Admin only)")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAttendee(@PathVariable Long id) {
         attendeeService.deleteAttendee(id);
         return ResponseEntity.ok("Attendee deleted successfully");
     }

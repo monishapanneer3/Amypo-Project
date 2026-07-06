@@ -30,14 +30,14 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Get all users (Admin only)")
     @SecurityRequirement(name = "bearerAuth")
-    public ResponseEntity<List<User>> getAll() {
+    public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userRepository.findAll());
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update user")
     @SecurityRequirement(name = "bearerAuth")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User updated) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updated) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + id));
         user.setUsername(updated.getUsername());

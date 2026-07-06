@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +27,8 @@ public class SpeakerController {
 
     @GetMapping
     @Operation(summary = "Get all speakers")
-    public ResponseEntity<Page<SpeakerDTO>> getAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return ResponseEntity.ok(speakerService.getAllSpeakers(PageRequest.of(page, size)));
+    public ResponseEntity<Page<SpeakerDTO>> getAllSpeakers(Pageable pageable) {
+        return ResponseEntity.ok(speakerService.getAllSpeakers(pageable));
     }
 
     @GetMapping("/{id}")
@@ -44,7 +41,7 @@ public class SpeakerController {
 
     @PostMapping
     @Operation(summary = "Create speaker")
-    public ResponseEntity<SpeakerDTO> create(@RequestBody SpeakerDTO dto) {
+    public ResponseEntity<SpeakerDTO> createSpeaker(@RequestBody SpeakerDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(speakerService.createSpeaker(dto));
     }
 
@@ -57,7 +54,7 @@ public class SpeakerController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete speaker (Admin only)")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
+    public ResponseEntity<String> deleteSpeaker(@PathVariable Long id) {
         speakerService.deleteSpeaker(id);
         return ResponseEntity.ok("Speaker deleted successfully");
     }

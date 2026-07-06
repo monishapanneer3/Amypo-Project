@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.LoginRequest;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JwtUtil;
@@ -26,6 +25,9 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public AuthController() {
+    }
+
     public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil,
                           UserDetailsService userDetailsService, UserRepository userRepository,
                           PasswordEncoder passwordEncoder) {
@@ -38,12 +40,13 @@ public class AuthController {
 
     @PostMapping("/login")
     @Operation(summary = "Login and get JWT token")
-    public ResponseEntity<?> login(@RequestBody LoginRequest credentials) {
+    public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         try {
+            String username = credentials.get("username");
+            String password = credentials.get("password");
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            credentials.getUsername(), credentials.getPassword()));
-            UserDetails userDetails = userDetailsService.loadUserByUsername(credentials.getUsername());
+                    new UsernamePasswordAuthenticationToken(username, password));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             String token = jwtUtil.generateToken(userDetails);
             return ResponseEntity.ok(Map.of("token", token));
         } catch (BadCredentialsException e) {

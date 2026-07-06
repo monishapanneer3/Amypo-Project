@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +27,8 @@ public class SessionController {
 
     @GetMapping
     @Operation(summary = "Get all sessions")
-    public ResponseEntity<Page<SessionDTO>> getAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return ResponseEntity.ok(sessionService.getAllSessions(PageRequest.of(page, size)));
+    public ResponseEntity<Page<SessionDTO>> getAllSessions(Pageable pageable) {
+        return ResponseEntity.ok(sessionService.getAllSessions(pageable));
     }
 
     @GetMapping("/{id}")
@@ -44,7 +41,7 @@ public class SessionController {
 
     @PostMapping
     @Operation(summary = "Create session")
-    public ResponseEntity<SessionDTO> create(@RequestBody SessionDTO dto) {
+    public ResponseEntity<SessionDTO> createSession(@RequestBody SessionDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(sessionService.createSession(dto));
     }
 
@@ -57,7 +54,7 @@ public class SessionController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete session (Admin only)")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
+    public ResponseEntity<String> deleteSession(@PathVariable Long id) {
         sessionService.deleteSession(id);
         return ResponseEntity.ok("Session deleted successfully.");
     }
