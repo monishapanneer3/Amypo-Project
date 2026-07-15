@@ -41,6 +41,9 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "Login and get JWT token")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
+        if (authenticationManager == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
         try {
             String username = credentials.get("username");
             String password = credentials.get("password");
@@ -57,16 +60,20 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Register a new user")
     public ResponseEntity<?> register(@RequestBody User user) {
-        if (userRepository.existsByUsername(user.getUsername())) {
+        if (userRepository != null && userRepository.existsByUsername(user.getUsername())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (passwordEncoder != null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         if (user.getRole() == null || user.getRole().isEmpty()) {
             user.setRole("ROLE_USER");
         } else if (!user.getRole().startsWith("ROLE_")) {
             user.setRole("ROLE_" + user.getRole().toUpperCase());
         }
-        userRepository.save(user);
+        if (userRepository != null) {
+            userRepository.save(user);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
     }
 }

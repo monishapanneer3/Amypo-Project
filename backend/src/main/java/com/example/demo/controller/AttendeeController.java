@@ -59,6 +59,6 @@ public class AttendeeController {
     @Operation(summary = "Delete attendee (Admin only)")
     public ResponseEntity<String> deleteAttendee(@PathVariable Long id) {
         attendeeService.deleteAttendee(id);
-        return ResponseEntity.ok("Attendee deleted successfully");
+        return ResponseEntity.ok("Attendee deleted successfully.");
     }
 }
