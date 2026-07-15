@@ -21,6 +21,9 @@ public class AttendeeController {
 
     private final AttendeeService attendeeService;
 
+    public AttendeeController() {
+    }
+
     public AttendeeController(AttendeeService attendeeService) {
         this.attendeeService = attendeeService;
     }

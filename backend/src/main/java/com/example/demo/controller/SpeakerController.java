@@ -21,6 +21,9 @@ public class SpeakerController {
 
     private final SpeakerService speakerService;
 
+    public SpeakerController() {
+    }
+
     public SpeakerController(SpeakerService speakerService) {
         this.speakerService = speakerService;
     }

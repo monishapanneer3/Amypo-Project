@@ -21,6 +21,9 @@ public class SessionController {
 
     private final SessionService sessionService;
 
+    public SessionController() {
+    }
+
     public SessionController(SessionService sessionService) {
         this.sessionService = sessionService;
     }
