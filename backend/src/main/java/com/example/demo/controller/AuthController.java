@@ -19,11 +19,11 @@ import java.util.Map;
 @Tag(name = "Auth", description = "Authentication endpoints")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
-    private final UserDetailsService userDetailsService;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private AuthenticationManager authenticationManager;
+    private JwtUtil jwtUtil;
+    private UserDetailsService userDetailsService;
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     public AuthController() {
     }

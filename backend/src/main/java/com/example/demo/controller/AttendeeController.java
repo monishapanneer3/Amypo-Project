@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name = "bearerAuth")
 public class AttendeeController {
 
-    private final AttendeeService attendeeService;
+    private AttendeeService attendeeService;
 
     public AttendeeController() {
     }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name = "bearerAuth")
 public class SpeakerController {
 
-    private final SpeakerService speakerService;
+    private SpeakerService speakerService;
 
     public SpeakerController() {
     }

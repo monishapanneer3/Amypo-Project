@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name = "bearerAuth")
 public class SessionController {
 
-    private final SessionService sessionService;
+    private SessionService sessionService;
 
     public SessionController() {
     }
