@@ -59,6 +59,6 @@ public class SpeakerController {
     @Operation(summary = "Delete speaker (Admin only)")
     public ResponseEntity<String> deleteSpeaker(@PathVariable Long id) {
         speakerService.deleteSpeaker(id);
-        return ResponseEntity.ok("Speaker deleted successfully");
+        return ResponseEntity.ok("Speaker deleted successfully.");
     }
 }
