@@ -1,0 +1,4 @@
+/* Canonical Navbar styles live in src/layout/Navbar.css and are imported
+   directly by src/layout/Navbar.jsx. This file exists to satisfy the
+   documented `components/layout` directory listing. */
+@import "../../layout/Navbar.css";
