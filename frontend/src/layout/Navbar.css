@@ -1,0 +1,64 @@
+.eventsphere-navbar {
+  display: block;
+  width: 100%;
+  background-color: #141414;
+  padding: 0;
+}
+
+.eventsphere-navbar .navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+}
+
+.eventsphere-navbar .navbar-brand {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.3px;
+  margin-right: 32px;
+  white-space: nowrap;
+}
+
+.eventsphere-navbar .navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.eventsphere-navbar .navbar-link {
+  color: rgba(255, 255, 255, 0.75);
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.eventsphere-navbar .navbar-link:hover {
+  color: #ffffff;
+}
+
+.eventsphere-navbar .navbar-link.active {
+  background-color: #1677ff;
+  color: #ffffff;
+}
+
+.eventsphere-navbar .navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eventsphere-navbar .navbar-username {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+}
+
+.eventsphere-navbar .navbar-logout-btn {
+  background-color: #ff4d4f;
+  border-color: #ff4d4f;
+}
